@@ -25,3 +25,10 @@
     cursor: pointer;
     color: #003580;
   }
+
+  @media only screen and (max-width: 600px) {
+    .navContainer {
+      max-width: 504px;
+      width: 80%;
+    }
+  }

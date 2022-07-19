@@ -126,3 +126,9 @@
   .optionCounterButton:disabled {
     cursor: not-allowed;
   }
+
+  @media only screen and (max-width: 600px) {
+    .headerContainer {
+      max-width: 400px;
+    }
+  }
