@@ -1,19 +1,45 @@
 import "./login.css";
 import { useState } from 'react';
 import { useContext } from 'react';
-import { AuthContext } from './../../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = ()=>{
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
 
-    
+    const {user, loading, error, dispatch} = useContext(AuthContext)
+    const navigate = useNavigate()
 
-    const {loading, error, dispatch} = useContext(AuthContext)
+    const handleClick = async (e) => {
+        e.preventDefault();
+        dispatch({ type: "LOGIN_START" });
+        try {
+          const res = await axios.post("http://localhost:5000/api/auth/login", {username, password});
+          dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+          navigate("/")
+        } catch (err) {
+          dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
+        }
+      };
 
+      console.log(user)
     return <div className="login">
         <div className="lContainer">
-            <input type="text" placeholder="User name" onChange={e=>(e.target.value)} className="lInput"/>
+            <input type="text" placeholder="User name" onChange={e=> setUsername(e.target.value)} className="lInput"/>
+
+            <input
+                type="password"
+                placeholder="password"
+                id="password"
+                onChange={e=> setPassword(e.target.value)}
+                className="lInput"
+                />
+            <button disabled={loading} onClick={handleClick} className="lButton">
+            Login
+            </button>
+            {error && <span>{error.message}</span>}
         </div>
     </div>
 }
