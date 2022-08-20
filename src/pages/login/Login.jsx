@@ -9,7 +9,7 @@ const Login = ()=>{
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
 
-    const {user, loading, error, dispatch} = useContext(AuthContext)
+    const {loading, error, dispatch} = useContext(AuthContext)
     const navigate = useNavigate()
 
     const handleClick = async (e) => {
@@ -24,7 +24,6 @@ const Login = ()=>{
         }
       };
 
-      console.log(user)
     return <div className="login">
         <div className="lContainer">
             <input type="text" placeholder="User name" onChange={e=> setUsername(e.target.value)} className="lInput"/>
