@@ -3,7 +3,7 @@ import useFetch from '../../hooks/useFetch';
 
 const Featured = () => {
 
-  const {data, loading, error} = useFetch("http://localhost:5000/api/hotels/countByCity?cities=cox bazar,chitagong,Dhaka")
+  const {data, loading, error} = useFetch("https://hotel-booking-app-api.herokuapp.com/api/hotels/countByCity?cities=cox bazar,chitagong,Dhaka")
 
   return (
     <div className="featured">
